@@ -641,7 +641,7 @@
     <svg class="corner-peek" viewBox="0 0 180 170" style="width:68px; height:68px; top:36%; left:4%; transform:rotate(-10deg);"><use href="#dog-taco"/></svg>
     <div class="eyebrow">— ABOUT THE DISTANCE —</div>
     <h2>It's a lot of miles.</h2>
-    <p>Different time zones, different cities, way too many hours in between. But somehow none of it has made this feel any less real.</p>
+    <p>There’s only a three-hour time difference between us, but I still hate that I can’t be by your side whenever I want. Even with the distance, everything between us still feels so special.</p>
     <svg class="flight-path" viewBox="0 0 460 64">
       <circle cx="26" cy="42" r="5" fill="#3b2a20"/>
       <circle cx="434" cy="42" r="5" fill="#3b2a20"/>
@@ -665,7 +665,7 @@
   <section class="scene" data-scene="4">
     <div class="eyebrow">— THE COMMITTEE —</div>
     <h2>They've been in on it too</h2>
-    <p>Otis, Milo, Taiga, and Taco have known about this for a while. They think it's a good idea.</p>
+    <p>Otis, Milo, Taiga, and Taco have known about this for a while. They think it's a good idea!</p>
     <div class="critters">
       <figure class="critter"><svg viewBox="0 0 180 170"><use href="#cat-otis"/></svg><figcaption contenteditable="true">Otis</figcaption></figure>
       <figure class="critter"><svg viewBox="0 0 180 170"><use href="#dog-taco"/></svg><figcaption contenteditable="true">Taco</figcaption></figure>
@@ -679,7 +679,7 @@
     <svg class="corner-peek" viewBox="0 0 180 170" style="width:80px; height:80px; top:44%; right:-14px; transform:rotate(11deg);"><use href="#cat-milo"/></svg>
     <div class="eyebrow">— ALMOST THERE —</div>
     <h2>Before I ask you something...</h2>
-    <p>I've been thinking about how to say this for a while now. Take a breath. Here it comes.</p>
+    <p>I’ve been thinking about how to say this for a while now. I don’t think words can fully express how much you mean to me, but I want to try. Everything we’ve shared has become so special to me, and I’ve realized just how much I want you in my life.</p>
     <button class="btn btn-yes" id="readyBtn" type="button">I'm ready</button>
     <div class="suspense-msg" id="suspenseMsg" hidden></div>
   </section>
@@ -688,7 +688,7 @@
     <div class="finale">
       <div class="eyebrow">— SPECIAL DELIVERY —</div>
       <h2>Will you be my girlfriend?</h2>
-      <textarea class="finale-note" placeholder="write the rest of the letter here...">No matter how many time zones sit between us, I keep mailing my heart to you anyway.</textarea>
+      <textarea class="finale-note" placeholder="write the rest of the letter here...">You have my heart, and I promise I’ll always choose you, support you, and do my best for you.</textarea>
       <div class="critters">
         <figure class="critter"><svg viewBox="0 0 180 170"><use href="#cat-otis"/></svg></figure>
         <figure class="critter"><svg viewBox="0 0 180 170"><use href="#dog-taco"/></svg></figure>
@@ -741,13 +741,12 @@
 
 <template id="polaroidTemplate">
   <figure class="polaroid">
-    <div class="photo-zone" tabindex="0" role="button" aria-label="Add a photo">
+    <div class="photo-zone">
       <div class="photo-placeholder">
         <svg viewBox="0 0 24 24"><use href="#upload-icon"/></svg>
         <span>add a photo</span>
       </div>
       <img alt="" hidden>
-      <input type="file" accept="image/*" class="photo-input">
     </div>
     <input type="text" class="cap-input" placeholder="write a caption...">
   </figure>
@@ -956,35 +955,48 @@
   const galleryGrid = document.getElementById('galleryGrid');
   const polaroidTemplate = document.getElementById('polaroidTemplate');
 
-  function wirePolaroid(node){
+  const galleryPhotos = [
+    { src: 'LA.jpg' },
+    { src: 'drawing.jpg' },
+    { src: 'persona.jpg' },
+    { src: 'Cinci!.jpg' }
+  ];
+
+  function wirePolaroid(node, saved){
     const zone = node.querySelector('.photo-zone');
-    const input = node.querySelector('.photo-input');
     const img = node.querySelector('img');
     const placeholder = node.querySelector('.photo-placeholder');
+    const caption = node.querySelector('.cap-input');
 
-    zone.addEventListener('click', function(){ input.click(); });
-    zone.addEventListener('keypress', function(e){ if(e.key==='Enter'||e.key===' ') input.click(); });
-    input.addEventListener('click', function(e){ e.stopPropagation(); });
-    input.addEventListener('change', function(){
-      const file = input.files && input.files[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.onload = function(ev){
-        img.src = ev.target.result;
+    if(saved && typeof saved.caption === 'string'){
+      caption.value = saved.caption;
+    }
+
+    if(saved && saved.src){
+      img.addEventListener('load', function(){
         img.hidden = false;
         placeholder.style.display = 'none';
         zone.classList.add('has-photo');
-      };
-      reader.readAsDataURL(file);
-    });
+      }, { once: true });
+      img.addEventListener('error', function(){
+        img.hidden = true;
+        placeholder.style.display = '';
+        zone.classList.remove('has-photo');
+      }, { once: true });
+      img.src = saved.src;
+    } else {
+      img.hidden = true;
+      placeholder.style.display = '';
+      zone.classList.remove('has-photo');
+    }
   }
 
-  function addPolaroid(){
+  function addPolaroid(saved){
     const clone = polaroidTemplate.content.cloneNode(true);
     galleryGrid.appendChild(clone);
-    wirePolaroid(galleryGrid.lastElementChild);
+    wirePolaroid(galleryGrid.lastElementChild, saved);
   }
-  for(let i=0;i<4;i++) addPolaroid();
+  galleryPhotos.forEach(function(card){ addPolaroid(card); });
   document.getElementById('addPhoto').addEventListener('click', addPolaroid);
 
   // ---- envelope open ----
