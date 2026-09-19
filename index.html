@@ -201,9 +201,9 @@
   .flight-path{ display:block; margin:0.4rem auto 0; width:100%; max-width:460px; height:64px; }
 
   /* gallery */
-  .gallery-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:1.3rem; max-width:640px; }
+  .gallery-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:1.6rem; max-width:860px; }
   .polaroid{
-    width:150px; background:var(--paper); padding:8px 8px 30px; border-radius:10px; box-shadow:0 12px 22px var(--shadow);
+    width:clamp(190px, 21vw, 240px); background:var(--paper); padding:10px 10px 36px; border-radius:10px; box-shadow:0 12px 22px var(--shadow);
     transform: rotate(var(--r, 0deg)); transition: transform 0.25s var(--bounce);
   }
   .polaroid:hover{ transform: rotate(0deg) scale(1.04) translateY(-4px); }
@@ -222,7 +222,7 @@
   input[type=file]{ display:none; }
   .cap-input{
     width:100%; border:none; outline:none; background:transparent; text-align:center; margin-top:6px;
-    font-family:'Caveat', cursive; font-size:1.05rem; color:var(--ink);
+    font-family:'Caveat', cursive; font-size:1.15rem; color:var(--ink);
   }
   .cap-input::placeholder{ color:rgba(59,42,32,0.4); }
   .add-photo{
@@ -956,10 +956,10 @@
   const polaroidTemplate = document.getElementById('polaroidTemplate');
 
   const galleryPhotos = [
-    { src: 'images/LA.jpg' },
-    { src: 'images/drawing.jpg' },
-    { src: 'images/persona.JPG' },
-    { src: 'images/Cinci!.JPG' }
+    { src: 'images/LA.jpg', caption: 'First trip together!' },
+    { src: 'images/drawing.jpg', caption: 'US :)' },
+    { src: 'images/persona.JPG', caption: 'Shoutout Fred' },
+    { src: 'images/Cinci!.JPG', caption: 'Cinci>SF' }
   ];
 
   function wirePolaroid(node, saved){
@@ -971,6 +971,7 @@
     if(saved && typeof saved.caption === 'string'){
       caption.value = saved.caption;
     }
+    caption.readOnly = !!(saved && saved.caption);
 
     if(saved && saved.src){
       img.addEventListener('load', function(){
