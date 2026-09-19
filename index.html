@@ -285,71 +285,39 @@
   }
   .scatter-text.show{ opacity:0.92; }
 
-  /* ---------- glamorous congratulations scene ---------- */
+  /* ---------- closing scene ---------- */
   .glam-scene{
     position:relative; overflow:hidden;
-    background:
-      radial-gradient(circle at 50% 12%, rgba(255,255,255,0.55), transparent 55%),
-      radial-gradient(circle at 50% 100%, rgba(255,255,255,0.25), transparent 60%),
-      linear-gradient(160deg, #fff8e4 0%, #f6e2ab 40%, #e7c274 72%, #d1a24d 100%);
+    background: linear-gradient(180deg, #f7f1e6 0%, #efe3cf 100%);
   }
-  .glam-blob{ position:absolute; border-radius:50%; filter:blur(55px); opacity:0.5; z-index:0; }
-  .glam-blob.g1{ width:260px; height:260px; background:#f3c9d8; top:4%; left:4%; }
-  .glam-blob.g2{ width:220px; height:220px; background:#cdbdec; bottom:8%; right:6%; }
-  .glam-blob.g3{ width:200px; height:200px; background:#fff0c2; bottom:20%; left:10%; }
-  @media (max-width:640px){ .glam-blob{ transform:scale(0.65); } }
   .glam-scene::before{
-    content:''; position:absolute; inset:14px; z-index:0; pointer-events:none;
-    border-radius:36px; border: 1.5px solid rgba(184,134,11,0.55);
+    content:''; position:absolute; inset:18px; z-index:0; pointer-events:none;
+    border-radius:24px; border:1px solid rgba(59,42,32,0.12);
   }
-  .glam-scene::after{
-    content:''; position:absolute; inset:22px; z-index:0; pointer-events:none;
-    border-radius:30px; border: 1px dashed rgba(184,134,11,0.35);
-  }
-  .glam-corner{ position:absolute; width:56px; height:56px; z-index:1; opacity:0.9; pointer-events:none; }
-  .glam-corner.tl{ top:2px; left:2px; transform:rotate(-8deg); }
-  .glam-corner.tr{ top:2px; right:2px; transform:rotate(8deg) scaleX(-1); }
-  .glam-corner.bl{ bottom:2px; left:2px; transform:rotate(8deg); }
-  .glam-corner.br{ bottom:2px; right:2px; transform:rotate(-8deg) scaleX(-1); }
-  @media (max-width:640px){ .glam-corner{ width:38px; height:38px; } }
-  .glam-badge{
-    display:inline-flex; align-items:center; gap:6px; padding:0.35rem 1rem; border-radius:999px;
-    background:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.9);
-    box-shadow:0 6px 14px rgba(122,90,30,0.12);
-    font-family:'Quicksand', sans-serif; font-weight:600; font-size:0.78rem; letter-spacing:0.03em;
-    color:#7a5a1e; position:relative; z-index:1;
-  }
-  .glam-eyebrow{ display:none; }
-  .glam-headline-row{ display:flex; align-items:center; justify-content:center; gap:0.4rem; position:relative; z-index:1; }
-  .glam-laurel{ width:48px; height:96px; opacity:0.9; flex-shrink:0; }
-  .glam-laurel.flip{ transform:scaleX(-1); }
+  .glam-eyebrow{ display:block; }
+  .glam-headline-row{ display:block; position:relative; z-index:1; }
+  .glam-laurel{ display:none; }
   .glam-title{
-    font-family:'Playfair Display', serif; font-style:italic; font-weight:700;
-    font-size: clamp(2.8rem, 10vw, 5.4rem); margin:0; line-height:1;
-    background: linear-gradient(90deg, #8a6a1e, #fdf0c4, #b8860b, #fdf0c4, #8a6a1e);
-    background-size: 220% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation: shimmerMove 3.2s linear infinite;
-    filter: drop-shadow(0 3px 10px rgba(184,134,11,0.25));
+    font-family:'Caveat', cursive; font-style:normal; font-weight:700;
+    font-size: clamp(2.4rem, 8vw, 4rem); margin:0; line-height:1.05;
+    color:var(--ink);
   }
-  @keyframes shimmerMove{ to{ background-position: 220% center; } }
   .glam-sub{
-    font-family:'Caveat', cursive; font-weight:600; font-size:1.5rem; color:#6b5218;
+    font-family:'Special Elite', monospace; font-weight:400; font-size:0.9rem; color:var(--ink-soft);
     margin:0; position:relative; z-index:1; outline:none;
   }
-  .glam-divider{ display:flex; align-items:center; gap:0.6rem; width:220px; margin:0.2rem auto; position:relative; z-index:1; }
-  .glam-divider span{ flex:1; height:1px; background:linear-gradient(90deg, transparent, #b8860b, transparent); }
-  .glam-diamond{ width:20px; height:20px; animation: twinkle 2.4s ease-in-out infinite; }
+  .glam-divider{ display:none; }
   .glam-note{
     max-width:44ch; width:100%; min-height:60px; text-align:center; border:none; outline:none; background:transparent; resize:none;
-    font-family:'Caveat', cursive; font-size:1.3rem; color:#6b5218; position:relative; z-index:1;
+    font-family:'Caveat', cursive; font-size:1.25rem; color:var(--ink-soft); position:relative; z-index:1;
   }
   .glam-critters{ position:relative; z-index:1; }
   .glam-critters .critter-badge{
     display:flex; align-items:center; justify-content:center; width:96px; height:96px; border-radius:50%;
-    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.35));
-    box-shadow: 0 8px 18px rgba(122,90,30,0.2), inset 0 0 0 2px rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.45);
+    box-shadow: 0 8px 18px rgba(59,42,32,0.08);
   }
-  .glam-critters svg{ width:70px; height:70px; filter: drop-shadow(0 4px 8px rgba(122,90,30,0.25)); }
+  .glam-critters svg{ width:70px; height:70px; filter:none; }
   .glam-scene h1, .glam-scene p{ position:relative; z-index:1; }
 
   @media (prefers-reduced-motion: reduce){ *{ transition-duration:0.01ms !important; } }
@@ -711,22 +679,12 @@
   </section>
 
   <section class="scene glam-scene" data-scene="7">
-    <div class="glam-blob g1"></div>
-    <div class="glam-blob g2"></div>
-    <div class="glam-blob g3"></div>
-    <svg class="glam-corner tl" viewBox="0 0 60 60"><use href="#flower-lily"/></svg>
-    <svg class="glam-corner tr" viewBox="0 0 60 60"><use href="#flower-rose"/></svg>
-    <svg class="glam-corner bl" viewBox="0 0 60 60"><use href="#flower-rose"/></svg>
-    <svg class="glam-corner br" viewBox="0 0 60 60"><use href="#flower-lily"/></svg>
-    <div class="glam-badge">💕 it's official 💕</div>
     <div class="glam-headline-row">
-      <svg class="glam-laurel" viewBox="0 0 80 160"><use href="#laurel-branch"/></svg>
-      <h1 class="glam-title">Congratulations</h1>
-      <svg class="glam-laurel flip" viewBox="0 0 80 160"><use href="#laurel-branch"/></svg>
+      <div class="eyebrow glam-eyebrow">— THE END —</div>
+      <h1 class="glam-title">That’s it!</h1>
     </div>
-    <p class="glam-sub" contenteditable="true">to the both of us 💫</p>
-    <div class="glam-divider"><span></span><svg class="glam-diamond" viewBox="0 0 40 40"><use href="#sticker-star"/></svg><span></span></div>
-    <textarea class="glam-note" placeholder="write something here...">Here's to every mile behind us, and however many are still ahead of us.</textarea>
+    <p class="glam-sub" contenteditable="true">I wanted to make something simple and sweet for you.</p>
+    <textarea class="glam-note" placeholder="write something here...">I know it's nothing crazy, but I still hope you like it.</textarea>
     <div class="critters glam-critters" id="glamCritters">
       <figure class="critter"><div class="critter-badge"><svg viewBox="0 0 180 170"><use href="#cat-otis"/></svg></div></figure>
       <figure class="critter"><div class="critter-badge"><svg viewBox="0 0 180 170"><use href="#dog-taco"/></svg></div></figure>
